@@ -1,14 +1,16 @@
 import styles from './StudentCard.module.css'
 import PropTypes from 'prop-types';
+
+
 const StudentCard = ({age = 0, name = "guest", isEnrolled = false }) =>{
-    let enrolled;
-    isEnrolled ? enrolled = "yes" : enrolled = "no";
-   
+    
+    
+    
     return(
         <div className={styles.card}>
             <p>Age: {age} </p>
             <p>Name: {name}</p>
-            <p>Enrolled: {enrolled}</p>
+            <p>Enrolled: { isEnrolled ?  "yes" :  "no"}</p>
         </div>
     );
 }

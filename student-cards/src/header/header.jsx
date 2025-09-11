@@ -1,12 +1,13 @@
 import styles from './header.module.css'
 
-const Header = ({filter = "Enrolled"}) =>{
 
-    
+const Header = ({filter,toggleFilter}) =>{
+
+   
     return(
         <nav>
             <p>My app</p>
-            <button className={styles.btn}>{filter}</button>
+            <button className={styles.btn} onClick={filter}>{toggleFilter}</button>
         </nav>
     );
 }
