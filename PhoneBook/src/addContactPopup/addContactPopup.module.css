@@ -1,0 +1,41 @@
+.popup{
+    position: absolute;
+    width: 30%;
+    height: 300px;
+    background-color: #f8f8f8;
+    top: 20%;
+    left: 35%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.popup input{
+    width: 70%;
+    height: 30px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.popup button{
+    width: 50%;
+    height: 35px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #669bbc;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

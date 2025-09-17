@@ -1,7 +1,15 @@
 import React, {useState} from "react";
 import styles from './header.module.css'
 
-const Header = () => {
+const Header = (toggleAdd) => {
+
+
+    const [searchTerm, setSearchTerm] = useState("");
+    
+
+    const handleChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
     return(
         <div className={styles.header}>
@@ -11,13 +19,13 @@ const Header = () => {
             </div>
             <div className={styles.input_container}>
                 <span className={`material-symbols-outlined ${styles.icon}`}>search</span>
-                <input type="text" placeholder="Search"/>
+                <input type="text" placeholder="Search" onChange={handleChange}/>
             </div>
           
                
              <div className={styles.fav}>
                 <span className={`material-symbols-outlined ${styles.icon}`}>star</span>
-                 <span className={`material-symbols-outlined ${styles.icon}`}>person_add</span>
+                 <span className={`material-symbols-outlined ${styles.icon}`} onClick={toggleAdd}>person_add</span>
               
             </div>        
         </div>

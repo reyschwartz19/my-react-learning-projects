@@ -1,0 +1,19 @@
+.contact_card{
+    width: 100%;
+}
+.contact_card:nth-child(even){
+    background-color: #f8f8f8;
+}
+.contact_card:hover{
+    background-color: #e2e2e2;
+}
+.icon{
+    color: #669bbc;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin: 0 10px;
+}
+.icon:hover{
+    color: #336699;
+}
