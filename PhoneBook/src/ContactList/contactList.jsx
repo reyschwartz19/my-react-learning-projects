@@ -1,14 +1,14 @@
 import styles from './contactList.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 import ContactCard from '../ContactCard/contactCard.jsx';
 
-const ContactList = () => {
+const ContactList = ({isBlurred, contacts}) => {
 
-    
+   
 
 
      return(
-        <div className={styles.contact_list}>
+        <div className={`${styles.contact_list} ${isBlurred ? styles.blurred : ''}`}>
           <h2>Contacts()</h2>
           <table>
             <thead>
@@ -19,9 +19,7 @@ const ContactList = () => {
                </tr>
             </thead>
             <tbody>
-               <ContactCard />
-               <ContactCard />
-               <ContactCard />
+              {contacts.map((contact, i) => <ContactCard key={i} contact={contact} />)}
             </tbody>
           </table>
         </div>

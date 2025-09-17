@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from './header.module.css'
 
-const Header = (toggleAdd) => {
+const Header = ({popUpDisplay, isBlurred}) => {
 
 
     const [searchTerm, setSearchTerm] = useState("");
@@ -11,8 +11,10 @@ const Header = (toggleAdd) => {
         setSearchTerm(event.target.value);
     };
 
+    
+
     return(
-        <div className={styles.header}>
+        <div className={`${styles.header} ${isBlurred ? styles.blurred : ''}`}>
             <div className={styles.logo}>
                 <span className={`material-symbols-outlined ${styles.icon_logo}`}>contacts_product</span>
                 <span className={styles.header_text}>Contacts</span>
@@ -25,11 +27,13 @@ const Header = (toggleAdd) => {
                
              <div className={styles.fav}>
                 <span className={`material-symbols-outlined ${styles.icon}`}>star</span>
-                 <span className={`material-symbols-outlined ${styles.icon}`} onClick={toggleAdd}>person_add</span>
+                 <span className={`material-symbols-outlined ${styles.icon}`} onClick={popUpDisplay}>person_add</span>
               
             </div>        
         </div>
     );
+
+
 
 }
 

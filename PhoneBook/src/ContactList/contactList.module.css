@@ -30,3 +30,7 @@ td, th{
 th{
     width: 30%;
 }
+.blurred{
+    filter: blur(2px);
+    pointer-events: none;
+}
