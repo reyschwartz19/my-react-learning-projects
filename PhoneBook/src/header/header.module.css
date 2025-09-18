@@ -93,3 +93,7 @@ body{
     filter: blur(2px);
     pointer-events: none;
 }
+.favorite{
+    color: gold !important;
+   
+}

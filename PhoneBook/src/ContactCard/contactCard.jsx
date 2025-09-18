@@ -1,7 +1,7 @@
 import styles from './contactCard.module.css';
 import React from 'react';
 
-const ContactCard = ({contact}) => {
+const ContactCard = ({contact,removeContact,index, toggleFavorite}) => {
 
     return(
         
@@ -9,8 +9,14 @@ const ContactCard = ({contact}) => {
                 <td>{contact.Name}</td>
                 <td>{contact.Phone}</td>
                 <td className={styles.actions}>
-                    <span className={`material-symbols-outlined ${styles.icon}`}>star</span>
-                    <span className={`material-symbols-outlined ${styles.icon}`}>delete</span>
+                    <span className={`material-symbols-outlined ${styles.icon} ${contact.isFavorite ? styles.favorite : ''}`}
+                    onClick={() => toggleFavorite(index)}
+                    >
+                        {contact.isFavorite ? 'star' : 'star_outline'}
+                    </span>
+                    <span className={`material-symbols-outlined ${styles.icon}`} onClick={() => removeContact(index)}>
+                        delete
+                   </span>
                 </td>
            </tr>
         

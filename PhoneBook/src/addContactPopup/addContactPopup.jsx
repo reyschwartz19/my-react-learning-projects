@@ -7,7 +7,7 @@ const AddContactPopup = ({addContact, popUpDisplay,contacts}) => {
   const [number, setNumber] = useState('');
 
    const handleAdd = () => {
-    addContact ({Name: contactName, Phone: number});
+    addContact ({Name: contactName, Phone: number, isFavorite: false});
     setContactName("");
     setNumber("");
    }

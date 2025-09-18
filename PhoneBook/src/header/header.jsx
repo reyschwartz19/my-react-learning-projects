@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import styles from './header.module.css'
 
-const Header = ({popUpDisplay, isBlurred}) => {
+import styles from './header.module.css';
+
+const Header = ({popUpDisplay, isBlurred, toggleFavoriteDisplay, favorites, searchTerm, setSearchTerm}) => {
 
 
-    const [searchTerm, setSearchTerm] = useState("");
+    
     
 
     const handleChange = (event) => {
@@ -21,12 +21,16 @@ const Header = ({popUpDisplay, isBlurred}) => {
             </div>
             <div className={styles.input_container}>
                 <span className={`material-symbols-outlined ${styles.icon}`}>search</span>
-                <input type="text" placeholder="Search" onChange={handleChange}/>
+                <input type="text" placeholder="Search" onChange={handleChange} value={searchTerm} />
             </div>
           
                
              <div className={styles.fav}>
-                <span className={`material-symbols-outlined ${styles.icon}`}>star</span>
+                <span className={`material-symbols-outlined ${styles.icon} ${favorites ? styles.favorite : ''}`} 
+                onClick={toggleFavoriteDisplay}
+                > 
+                    {favorites ? 'star' : 'star_outline'}
+                </span>
                  <span className={`material-symbols-outlined ${styles.icon}`} onClick={popUpDisplay}>person_add</span>
               
             </div>        
