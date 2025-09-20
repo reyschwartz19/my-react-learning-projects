@@ -6,6 +6,12 @@ function App() {
   return (
     <>
       <MyComponent />
+      <MyComponent />
+      <MyComponent />
+      <MyComponent />
+      <MyComponent />
+      <MyComponent />
+      <MyComponent />
     </>
   )
 }
