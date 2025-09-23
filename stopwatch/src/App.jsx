@@ -6,6 +6,12 @@ function App() {
   return (
     <>
       <Stopwatch/>
+       <Stopwatch/>
+        <Stopwatch/>
+         <Stopwatch/>
+          <Stopwatch/>
+           <Stopwatch/>
+            <Stopwatch/>
     </>
   )
 }
