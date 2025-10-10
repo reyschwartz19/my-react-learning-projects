@@ -1,4 +1,4 @@
-import { Link,Outlet } from "react-router-dom";
+import { NavLink,Outlet } from "react-router-dom";
 
 const Profiles = () =>{
 
@@ -8,9 +8,9 @@ const Profiles = () =>{
         <div>
             <div>
             {profiles.map((profile)=>(
-                <Link key={profile} to={`/profiles/${profile}`}>
+                <NavLink key={profile} to={`/profiles/${profile}`}  >
                     Profile  {profile}
-                </Link>
+                </NavLink>
             ))}
            
         </div>
