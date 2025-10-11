@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { supabase } from "./supabse-clients";
+import { useNavigate } from "react-router-dom";
 
 const Mycomponent = () => {
 
@@ -8,6 +9,22 @@ const Mycomponent = () => {
     const [year, setYear] = useState('');
     const [carMake, setCarMake] = useState("");
     const [carModel, setCarModel] = useState("");
+    const[session,setSession] = useState(null)
+    const navigate = useNavigate();
+   
+    
+    useEffect(()=>{
+      const fetchSession = async()=>{
+        const {data: {session}} = await supabase.auth.getSession();
+        setSession(session);
+      }
+
+      console.log('session validated')
+
+      fetchSession()
+    },[])
+
+   
     
     const handleAddCar = async () => {
       const newCar = {carYear : year, make : carMake, model : carModel };
@@ -22,7 +39,7 @@ const Mycomponent = () => {
          setCars(prevCars => [...prevCars, data]);
       }
       
-        setYear(new Date().getFullYear());
+        setYear('');
     setCarMake("");
     setCarModel("");
     };
@@ -68,8 +85,10 @@ const Mycomponent = () => {
 
      
 
+   if(session) {
     return(
-        <div>
+       
+       <div>
          <h2>List of car objects</h2>
          <uL>
           {cars.map((car,index) => <div key={car.id}>
@@ -84,6 +103,11 @@ const Mycomponent = () => {
         </div>
     );
 
+}else{
+    return(
+        <div>Log in to access this page  <button onClick={()=>navigate('/')}>Home</button> </div>
+    );
+}
 }
 
 export default Mycomponent
