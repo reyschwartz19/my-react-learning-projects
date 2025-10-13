@@ -11,29 +11,26 @@ const Mycomponent = () => {
     const [carModel, setCarModel] = useState("");
     const[session,setSession] = useState(null)
     const navigate = useNavigate();
-   
     
+    const fetchSession = async () =>{
+       const currentSession = await supabase.auth.getSession()
+       console.log(currentSession);
+       setSession(currentSession.data.session);
+    }
+
     useEffect(()=>{
-      const fetchSession = async()=>{
-        const {data: {session}} = await supabase.auth.getSession();
-        setSession(session);
-      }
-
-      console.log('session validated')
-
       fetchSession()
     },[])
-
-   
-    
-    const handleAddCar = async () => {
+        
+     
+ const handleAddCar = async () => {
       const newCar = {carYear : year, make : carMake, model : carModel };
       
 
-      const {error,data} =   await supabase.from('cars').insert(newCar).single();
+      const {error,data} =   await supabase.from('cars').insert(newCar).select().single();
 
       if (error){
-        console.error('Erro adding car', error.message);
+        console.error('Error adding car', error.message);
         return;
       }else{
          setCars(prevCars => [...prevCars, data]);
@@ -49,7 +46,7 @@ const Mycomponent = () => {
                                       .select('*')
                                       .order('created_at',{ascending: true});
         if(error){
-            console.error('Erro reading car', error.message)
+            console.error('Error reading car', error.message)
             return;
         }
 
@@ -83,31 +80,38 @@ const Mycomponent = () => {
         fetchCars()
     },[])
 
-     
+     const logOut = async () =>{
+        await supabase.auth.signOut()
+        navigate('/');
+     }
 
-   if(session) {
+
     return(
        
        <div>
+      { session ? ( <>
+        <button onClick={logOut}>Logout</button>
          <h2>List of car objects</h2>
-         <uL>
-          {cars.map((car,index) => <div key={car.id}>
+         <ul>
+          {cars.map((car) => <div key={car.id}>
               <li>{car.carYear} {car.make} {car.model}</li>
               <button onClick={()=>deleteCar(car.id)}>Delete</button>
           </div> )}
-         </uL>
+         </ul>
          <input type="number" value={year} onChange={handleYearChange} /><br/>
          <input type="text" value={carMake} onChange={handleMakeChange} placeholder="enter car make" /><br/>
          <input type="text" value={carModel} onChange={handleModelChange} placeholder="enter car model" /><br/>
          <button onClick={handleAddCar}>Add car</button>
+         </>):(
+         <div>
+            Log in to continue
+            <button onClick={()=>navigate('/')}>Home</button>
+         </div>)
+         }
         </div>
     );
 
-}else{
-    return(
-        <div>Log in to access this page  <button onClick={()=>navigate('/')}>Home</button> </div>
-    );
-}
+
 }
 
 export default Mycomponent

@@ -25,7 +25,9 @@ export default function Auth(){
                 console.error('error signing up:', signUpError.message)
                 return;
             }
+            
             navigate('/cars')
+            
         }else{
             const {error: signInError} = await supabase.auth.signInWithPassword({email,password})
             if(signInError){
@@ -33,7 +35,9 @@ export default function Auth(){
                 console.error('Error signing in:', signInError.message);
                 return ;
             }
+            
             navigate('/cars')
+            
         }
         
     } catch(err){
@@ -41,6 +45,8 @@ export default function Auth(){
     } finally{
         setIsLoading(false);
     }
+
+    setPassword('');
     }
 
 
