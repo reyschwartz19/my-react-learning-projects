@@ -11,6 +11,7 @@ const Mycomponent = () => {
     const [carModel, setCarModel] = useState("");
     const[session,setSession] = useState(null)
     const navigate = useNavigate();
+  
     
     const fetchSession = async () =>{
        const currentSession = await supabase.auth.getSession()
@@ -21,13 +22,27 @@ const Mycomponent = () => {
     useEffect(()=>{
       fetchSession()
     },[])
+
+       useEffect(() => {
+  const channel = supabase
+    .channel('cars-channel')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'cars' }, (payload) => {
+      const newCar = payload.new;
+      setCars((prev) => [...prev, newCar]);
+    })
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []);
         
      
  const handleAddCar = async () => {
       const newCar = {carYear : year, make : carMake, model : carModel };
       
 
-      const {error,data} =   await supabase.from('cars').insert(newCar).select().single();
+      const {error,data} =   await supabase.from('cars').insert({...newCar,email:session.user.email}).select().single();
 
       if (error){
         console.error('Error adding car', error.message);
